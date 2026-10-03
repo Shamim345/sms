@@ -79,6 +79,9 @@
       justify-content: space-between;
       align-items: center;
       font-weight: bold;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
     }
 
     .menu-list {
@@ -91,6 +94,9 @@
       font-size: 14px;
       cursor: pointer;
       border-radius: 6px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #1e293b;
     }
 
     .menu-item:hover {
@@ -123,7 +129,7 @@
       width: 100%;
     }
 
-    input[type="number"], input[type="text"] {
+    input[type="number"], input[type="text"], input[type="tel"], input[type="time"], input[type="url"] {
       width: 100%;
       padding: 10px 12px;
       border: 1px solid #cbd5e1;
@@ -132,7 +138,7 @@
       outline: none;
     }
 
-    input[type="number"]:focus, input[type="text"]:focus {
+    input[type="number"]:focus, input[type="text"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus {
       border-color: #2563eb;
     }
 
@@ -157,16 +163,16 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .btn-send-group {
-      padding: 14px;
+      padding: 12px;
       background-color: #2563eb;
       color: #ffffff;
       border: none;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -176,12 +182,30 @@
       background-color: #1d4ed8;
     }
 
+    .btn-upload-main {
+      width: 100%;
+      padding: 12px;
+      background-color: #0d9488;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-upload-main:hover {
+      background-color: #0f766e;
+    }
+
     .last-uploaded-label {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: #64748b;
       text-align: center;
-      padding-top: 4px;
+      padding-top: 2px;
     }
 
     .modal-overlay {
@@ -200,6 +224,8 @@
     .modal-content {
       background: #ffffff;
       width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
       border-radius: 10px;
       padding: 16px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
@@ -226,25 +252,6 @@
       color: #334155;
     }
 
-    .contact-picker-row {
-      display: flex;
-      gap: 6px;
-    }
-
-    .btn-pick {
-      background-color: #2563eb;
-      color: #ffffff;
-      border: none;
-      padding: 8px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .btn-pick:hover { background-color: #1d4ed8; }
-
     .btn-save {
       width: 100%;
       padding: 12px;
@@ -256,6 +263,167 @@
       cursor: pointer;
       margin-top: 8px;
     }
+
+    .btn-clear {
+      width: 100%;
+      padding: 10px;
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    /* SMS Preview Box */
+    .sms-preview-box {
+      background-color: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-bottom: 14px;
+      color: #0f172a;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-cancel {
+      padding: 12px;
+      background-color: #64748b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp {
+      padding: 12px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Quick Contact Box */
+    .quick-contacts-box {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .quick-contacts-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .add-quick-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .add-quick-row input {
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+
+    .btn-add-quick {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .contact-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      background: #e2e8f0;
+    }
+
+    .chip-remove {
+      color: #ef4444;
+      font-weight: bold;
+      margin-left: 2px;
+    }
+
+    /* Mode List Styling */
+    .mode-list {
+      list-style: none;
+      margin-bottom: 12px;
+    }
+
+    .mode-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-item:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .mode-item.selected {
+      background-color: #eff6ff;
+      border-color: #2563eb;
+      color: #2563eb;
+    }
+
+    .mode-delete-btn {
+      color: #ef4444;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0 4px;
+    }
   </style>
 </head>
 <body>
@@ -265,52 +433,191 @@
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <nav class="menu-drawer" id="menuDrawer">
       <div class="drawer-header">
-        <span>Menu</span>
+        <span>MENU</span>
         <button style="background:none; border:none; font-size:18px; cursor:pointer;" onclick="closeMenu()">&times;</button>
       </div>
       <ul class="menu-list">
-        <li class="menu-item" onclick="handleMenu('Start-Trip')">Start-Trip</li>
-        <li class="menu-item" onclick="handleMenu('contact groups')">contact groups</li>
-        <li class="menu-item" onclick="handleMenu('gas reading')">gas reading</li>
-        <li class="menu-item" onclick="handleMenu('Customise Mode')">Customise Mode</li>
-        <li class="menu-item" onclick="handleMenu('Customise time')">Customise time</li>
-        <li class="menu-item" onclick="handleMenu('Upload')">Upload</li>
+        <li class="menu-item" onclick="handleMenu('START-TRIP')">START-TRIP</li>
+        <li class="menu-item" onclick="handleMenu('CONTACT GROUPS')">CONTACT GROUPS</li>
+        <li class="menu-item" onclick="handleMenu('GAS READING')">GAS READING</li>
+        <li class="menu-item" onclick="handleMenu('CUSTOMISE MODE')">CUSTOMISE MODE</li>
+        <li class="menu-item" onclick="handleMenu('CUSTOMISE TIME')">CUSTOMISE TIME</li>
+        <li class="menu-item" onclick="handleMenu('APPSCRIPT CONFIG')">APPSCRIPT CONFIG</li>
       </ul>
     </nav>
+
+    <!-- AppScript Config Modal -->
+    <div class="modal-overlay" id="appscriptModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">APPSCRIPT WEB APP URL</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeAppscriptModal()">&times;</button>
+        </div>
+
+        <div class="group-item">
+          <label for="appscriptUrlInput">Deployed Web App URL</label>
+          <input type="url" id="appscriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec">
+        </div>
+
+        <button class="btn-save" onclick="saveAppscriptUrl()">SAVE URL</button>
+      </div>
+    </div>
 
     <!-- Contact Groups Modal -->
     <div class="modal-overlay" id="contactModal">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 style="font-size: 16px; color: #0f172a;">Contact Groups</h4>
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">CONTACT GROUPS</h4>
           <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeContactModal()">&times;</button>
         </div>
 
         <div class="group-item">
           <label>NLDC</label>
-          <div class="contact-picker-row">
-            <input type="text" id="nldcContacts" placeholder="Comma separated numbers">
-            <button class="btn-pick" onclick="pickContacts('nldcContacts')">Pick</button>
-          </div>
+          <input type="tel" id="nldcContacts" placeholder="Comma separated phone numbers" onfocus="setActiveInput('nldcContacts')">
         </div>
 
         <div class="group-item">
-          <label>EGCB Hourly</label>
-          <div class="contact-picker-row">
-            <input type="text" id="egcbHourlyContacts" placeholder="Comma separated numbers">
-            <button class="btn-pick" onclick="pickContacts('egcbHourlyContacts')">Pick</button>
-          </div>
+          <label>EGCB HOURLY</label>
+          <input type="tel" id="egcbHourlyContacts" placeholder="Comma separated phone numbers" onfocus="setActiveInput('egcbHourlyContacts')">
         </div>
 
         <div class="group-item">
-          <label>EGCB Management</label>
-          <div class="contact-picker-row">
-            <input type="text" id="egcbMgmtContacts" placeholder="Comma separated numbers">
-            <button class="btn-pick" onclick="pickContacts('egcbMgmtContacts')">Pick</button>
-          </div>
+          <label>EGCB MANAGEMENT</label>
+          <input type="tel" id="egcbMgmtContacts" placeholder="Comma separated phone numbers" onfocus="setActiveInput('egcbMgmtContacts')">
         </div>
 
-        <button class="btn-save" onclick="saveContactGroups()">Save Groups</button>
+        <div class="group-item">
+          <label>GAS READING</label>
+          <input type="tel" id="gasReadingContacts" placeholder="Comma separated phone numbers" onfocus="setActiveInput('gasReadingContacts')">
+        </div>
+
+        <div class="quick-contacts-box">
+          <div class="quick-contacts-title">QUICK CONTACTS LIBRARY</div>
+          <p style="font-size: 11px; color: #64748b; margin-bottom: 8px;">Tap an active box above, then tap a saved contact below to quickly insert them.</p>
+
+          <div class="add-quick-row">
+            <input type="text" id="newContactName" placeholder="Name (e.g. John)">
+            <input type="tel" id="newContactNumber" placeholder="Phone Number">
+            <button class="btn-add-quick" onclick="addSavedContact()">Add</button>
+          </div>
+
+          <div class="contact-chips" id="contactChipsContainer"></div>
+        </div>
+
+        <button class="btn-save" onclick="saveContactGroups()">SAVE GROUPS</button>
+      </div>
+    </div>
+
+    <!-- Customise Mode Modal -->
+    <div class="modal-overlay" id="modeModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">SELECT / EDIT MODE</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeModeModal()">&times;</button>
+        </div>
+
+        <ul class="mode-list" id="modeListContainer"></ul>
+
+        <div class="add-quick-row">
+          <input type="text" id="newModeInput" placeholder="Add new custom mode name">
+          <button class="btn-add-quick" onclick="addNewMode()">Add Mode</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customise Time Modal -->
+    <div class="modal-overlay" id="timeModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">SELECT TIME</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeTimeModal()">&times;</button>
+        </div>
+
+        <div class="group-item">
+          <label for="customTimePicker">Pick Hour (24-Hour)</label>
+          <input type="time" id="customTimePicker">
+        </div>
+
+        <button class="btn-save" onclick="applyCustomTime()">APPLY TIME</button>
+        <button class="btn-clear" onclick="clearCustomTime()">CLEAR TIME</button>
+      </div>
+    </div>
+
+    <!-- Gas Reading Modal -->
+    <div class="modal-overlay" id="gasModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">GAS READING</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeGasModal()">&times;</button>
+        </div>
+
+        <div class="group-item">
+          <label for="todayReading">Today Reading</label>
+          <input type="number" step="any" inputmode="decimal" id="todayReading" placeholder="Enter today's reading">
+        </div>
+
+        <div class="group-item">
+          <label for="yesterdayReading">Yesterday Reading</label>
+          <input type="number" step="any" inputmode="decimal" id="yesterdayReading" placeholder="Enter yesterday's reading">
+        </div>
+
+        <div class="modal-actions" style="margin-top: 14px;">
+          <button class="btn-cancel" onclick="closeGasModal()">CANCEL</button>
+          <button class="btn-save" style="margin-top:0;" onclick="prepareGasSms()">SEND</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KWH Input Modal for Midnight Hour (00) -->
+    <div class="modal-overlay" id="kwhModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">ENTER KWH READING</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeKwhModal()">&times;</button>
+        </div>
+
+        <div class="group-item">
+          <label for="kwhInput">KWH Reading</label>
+          <input type="number" step="any" inputmode="decimal" id="kwhInput" placeholder="Enter KWH value">
+        </div>
+
+        <button class="btn-save" onclick="submitKwhValue()">CONTINUE TO PREVIEW</button>
+      </div>
+    </div>
+
+    <!-- SMS Preview Modal -->
+    <div class="modal-overlay" id="smsPreviewModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;" id="smsPreviewTitle">SMS PREVIEW</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeSmsPreviewModal()">&times;</button>
+        </div>
+
+        <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px;" id="smsRecipientsLabel">Recipients: </div>
+        <div class="sms-preview-box" id="smsPreviewText"></div>
+
+        <div class="modal-actions" id="previewActionContainer">
+          <button class="btn-cancel" onclick="closeSmsPreviewModal()">CANCEL</button>
+          <button class="btn-save" style="margin-top:0;" onclick="confirmAndSendSms('SMS')">CONFIRM & SEND</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Share Selection Modal (SMS vs WhatsApp) -->
+    <div class="modal-overlay" id="shareOptionModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 15px; color: #0f172a; text-transform: uppercase;">SELECT SEND METHOD</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeShareOptionModal()">&times;</button>
+        </div>
+
+        <p style="font-size: 13px; color: #334155; margin-bottom: 16px; text-align: center;">Choose how you want to send the EGCB message:</p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button class="btn-whatsapp" onclick="sendViaWhatsApp()">Share via WhatsApp</button>
+          <button class="btn-save" style="margin-top:0;" onclick="sendViaSmsDirect()">Send via SMS</button>
+          <button class="btn-cancel" onclick="closeShareOptionModal()">CANCEL</button>
+        </div>
       </div>
     </div>
 
@@ -369,69 +676,416 @@
       </div>
 
       <div class="bottom-buttons">
-        <button class="btn-send-group" onclick="sendGroupSms('EGCB')">Send EGCB</button>
-        <button class="btn-send-group" onclick="sendGroupSms('NLDC')">Send NLDC</button>
+        <button class="btn-send-group" onclick="prepareSms('EGCB')">SEND EGCB</button>
+        <button class="btn-send-group" onclick="prepareSms('NLDC')">SEND NLDC</button>
       </div>
 
+      <!-- Upload Button Moved to Main Page -->
+      <button class="btn-upload-main" id="btnUpload" onclick="uploadDataToAppscript()">UPLOAD TO SHEETS</button>
+
       <div class="last-uploaded-label" id="lastUploadedLabel">
-        Last Uploaded: 
+        Last Uploaded: Never
       </div>
     </div>
   </div>
 
   <script>
-    // Register Service Worker for PWA compliance
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(err => console.log('Service Worker failed:', err));
     }
 
+    let SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_ID/exec";
+
     let GROUPS = {
       NLDC: [],
       EGCB_Hourly: [],
-      EGCB_Mgmt: []
+      EGCB_Mgmt: [],
+      Gas_Reading: []
+    };
+
+    let SAVED_CONTACTS = [
+      { name: 'Control Room', number: '+8801700000000' }
+    ];
+
+    let SAVED_MODES = [
+      "No Modes",
+      "NLDC Demand",
+      "AGC",
+      "FGMO",
+      "EGCB",
+      "Plant Startup",
+      "Low Gas Pressure"
+    ];
+
+    let currentSelectedMode = "No Modes";
+    let currentSelectedHour = "";
+    let customSelectedMinutes = "";
+    let activeInputId = 'nldcContacts';
+
+    // Pending SMS state
+    let pendingSms = {
+      type: "", // "EGCB", "NLDC", "GAS"
+      recipients: [],
+      message: "",
+      gasDataToSave: null
     };
 
     window.onload = function() {
+      const savedScriptUrl = localStorage.getItem('haripur_script_url');
+      if (savedScriptUrl) SCRIPT_URL = savedScriptUrl;
+
       const savedGroups = localStorage.getItem('haripur_contact_groups');
-      if (savedGroups) {
-        GROUPS = JSON.parse(savedGroups);
+      if (savedGroups) GROUPS = Object.assign(GROUPS, JSON.parse(savedGroups));
+
+      const savedLibrary = localStorage.getItem('haripur_quick_contacts');
+      if (savedLibrary) SAVED_CONTACTS = JSON.parse(savedLibrary);
+
+      const savedModesList = localStorage.getItem('haripur_modes');
+      if (savedModesList) SAVED_MODES = JSON.parse(savedModesList);
+
+      const activeMode = localStorage.getItem('haripur_current_mode');
+      if (activeMode) currentSelectedMode = activeMode;
+
+      const activeHour = localStorage.getItem('haripur_current_hour');
+      if (activeHour) currentSelectedHour = activeHour;
+
+      const activeMins = localStorage.getItem('haripur_current_minutes');
+      if (activeMins) customSelectedMinutes = activeMins;
+
+      const lastUploadTime = localStorage.getItem('haripur_last_uploaded');
+      if (lastUploadTime) {
+        document.getElementById('lastUploadedLabel').innerText = `Last Uploaded: ${lastUploadTime}`;
       }
+
+      updateModeDisplay();
+      updateTimeDisplay();
       populateModalInputs();
+      renderContactChips();
+      checkAndLoadGasReadings();
     };
+
+    /* AppScript Upload Function */
+    function uploadDataToAppscript() {
+      if (!SCRIPT_URL || SCRIPT_URL.includes("YOUR_DEPLOYED_SCRIPT_ID")) {
+        alert("Please set your valid Apps Script Web App URL first under MENU -> APPSCRIPT CONFIG.");
+        openAppscriptModal();
+        return;
+      }
+
+      const uploadBtn = document.getElementById('btnUpload');
+      uploadBtn.innerText = "UPLOADING...";
+      uploadBtn.disabled = true;
+
+      // Prepare date/time string
+      const now = new Date();
+      if (currentSelectedHour) {
+        now.setHours(parseInt(currentSelectedHour, 10));
+        now.setMinutes(customSelectedMinutes ? parseInt(customSelectedMinutes, 10) : 0);
+      }
+      const timeStr = now.toString();
+
+      const gtMW = parseFloat(document.getElementById('field1').value) || 0;
+      const gtMvar = parseFloat(document.getElementById('field2').value) || 0;
+      const stMW = parseFloat(document.getElementById('field3').value) || 0;
+      const stMvar = parseFloat(document.getElementById('field4').value) || 0;
+      const net = parseFloat(document.getElementById('field5').value) || 0;
+      const fgp = parseFloat(document.getElementById('field6').value) || 0;
+
+      const totMW = gtMW + stMW;
+      const totMVAR = gtMvar + stMvar;
+
+      const formData = new URLSearchParams();
+      formData.append('time', timeStr);
+      formData.append('gtMW', gtMW);
+      formData.append('gtMvar', gtMvar);
+      formData.append('stMW', stMW);
+      formData.append('stMvar', stMvar);
+      formData.append('fgp', fgp);
+      formData.append('net', net);
+      formData.append('totMW', totMW);
+      formData.append('totMVAR', totMVAR);
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
+      })
+      .then(() => {
+        const formattedTimestamp = new Date().toLocaleString();
+        localStorage.setItem('haripur_last_uploaded', formattedTimestamp);
+        document.getElementById('lastUploadedLabel').innerText = `Last Uploaded: ${formattedTimestamp}`;
+        alert('Data uploaded successfully to Google Sheets!');
+      })
+      .catch((err) => {
+        alert('Upload failed: ' + err.message);
+      })
+      .finally(() => {
+        uploadBtn.innerText = "UPLOAD TO SHEETS";
+        uploadBtn.disabled = false;
+      });
+    }
+
+    /* Appscript Config Modal Handlers */
+    function openAppscriptModal() {
+      document.getElementById('appscriptUrlInput').value = SCRIPT_URL.includes("YOUR_DEPLOYED_SCRIPT_ID") ? "" : SCRIPT_URL;
+      document.getElementById('appscriptModal').classList.add('active');
+    }
+
+    function closeAppscriptModal() {
+      document.getElementById('appscriptModal').classList.remove('active');
+    }
+
+    function saveAppscriptUrl() {
+      const url = document.getElementById('appscriptUrlInput').value.trim();
+      if (!url) {
+        alert('Please enter a valid Apps Script URL.');
+        return;
+      }
+      SCRIPT_URL = url;
+      localStorage.setItem('haripur_script_url', url);
+      alert('Appscript URL saved successfully!');
+      closeAppscriptModal();
+    }
+
+    /* Gas Readings Persistence & Date Auto-shift */
+    function checkAndLoadGasReadings() {
+      const todayStr = new Date().toDateString();
+      const savedGasState = localStorage.getItem('haripur_gas_state');
+
+      if (savedGasState) {
+        const gasState = JSON.parse(savedGasState);
+        if (gasState.lastDate !== todayStr) {
+          document.getElementById('yesterdayReading').value = gasState.todayVal || "";
+          document.getElementById('todayReading').value = "";
+        } else {
+          document.getElementById('todayReading').value = gasState.todayVal || "";
+          document.getElementById('yesterdayReading').value = gasState.yesterdayVal || "";
+        }
+      }
+    }
+
+    function openGasModal() {
+      checkAndLoadGasReadings();
+      document.getElementById('gasModal').classList.add('active');
+    }
+
+    function closeGasModal() {
+      document.getElementById('gasModal').classList.remove('active');
+    }
+
+    function prepareGasSms() {
+      const todayVal = parseFloat(document.getElementById('todayReading').value) || 0;
+      const yesterdayVal = parseFloat(document.getElementById('yesterdayReading').value) || 0;
+
+      const value = (todayVal - yesterdayVal) / 1000;
+      const fullMessage = `Gas consumption:${value} MMSCFD.`;
+
+      let targetNumbers = GROUPS.Gas_Reading;
+      if (!targetNumbers || targetNumbers.length === 0) {
+        targetNumbers = GROUPS.EGCB_Mgmt.length > 0 ? GROUPS.EGCB_Mgmt : GROUPS.EGCB_Hourly;
+      }
+
+      closeGasModal();
+
+      pendingSms.gasDataToSave = {
+        todayVal: todayVal,
+        yesterdayVal: yesterdayVal,
+        lastDate: new Date().toDateString()
+      };
+
+      showSmsPreview('GAS', targetNumbers, fullMessage);
+    }
+
+    /* Mode Logic */
+    function updateModeDisplay() {
+      const modeLabel = document.getElementById('modeLabel');
+      if (currentSelectedMode === "No Modes" || !currentSelectedMode) {
+        modeLabel.innerText = "Mode: ";
+      } else {
+        modeLabel.innerText = `Mode: ${currentSelectedMode}`;
+      }
+    }
+
+    function renderModeList() {
+      const container = document.getElementById('modeListContainer');
+      container.innerHTML = '';
+
+      SAVED_MODES.forEach((modeName) => {
+        const li = document.createElement('li');
+        const isSelected = modeName === currentSelectedMode;
+        li.className = `mode-item ${isSelected ? 'selected' : ''}`;
+        
+        const deleteButtonHtml = modeName !== "No Modes" 
+          ? `<button class="mode-delete-btn" onclick="event.stopPropagation(); deleteMode('${modeName}')">&times;</button>` 
+          : '';
+
+        li.innerHTML = `
+          <span onclick="selectMode('${modeName}')">${modeName}</span>
+          ${deleteButtonHtml}
+        `;
+        container.appendChild(li);
+      });
+    }
+
+    function selectMode(modeName) {
+      currentSelectedMode = modeName;
+      localStorage.setItem('haripur_current_mode', modeName);
+      updateModeDisplay();
+      closeModeModal();
+    }
+
+    function addNewMode() {
+      const input = document.getElementById('newModeInput');
+      const newMode = input.value.trim();
+
+      if (!newMode) {
+        alert('Please enter a mode name.');
+        return;
+      }
+
+      if (!SAVED_MODES.includes(newMode)) {
+        SAVED_MODES.push(newMode);
+        localStorage.setItem('haripur_modes', JSON.stringify(SAVED_MODES));
+        input.value = '';
+        renderModeList();
+      } else {
+        alert('This mode already exists.');
+      }
+    }
+
+    function deleteMode(modeName) {
+      SAVED_MODES = SAVED_MODES.filter(m => m !== modeName);
+      if (currentSelectedMode === modeName) {
+        currentSelectedMode = "No Modes";
+        localStorage.setItem('haripur_current_mode', "No Modes");
+        updateModeDisplay();
+      }
+      localStorage.setItem('haripur_modes', JSON.stringify(SAVED_MODES));
+      renderModeList();
+    }
+
+    function openModeModal() {
+      renderModeList();
+      document.getElementById('modeModal').classList.add('active');
+    }
+
+    function closeModeModal() {
+      document.getElementById('modeModal').classList.remove('active');
+    }
+
+    /* Time Logic */
+    function updateTimeDisplay() {
+      const timeLabel = document.getElementById('timeLabel');
+      if (currentSelectedHour) {
+        timeLabel.innerText = `Time: ${currentSelectedHour}`;
+      } else {
+        timeLabel.innerText = "Time: ";
+      }
+    }
+
+    function openTimeModal() {
+      document.getElementById('timeModal').classList.add('active');
+    }
+
+    function closeTimeModal() {
+      document.getElementById('timeModal').classList.remove('active');
+    }
+
+    function applyCustomTime() {
+      const timeInput = document.getElementById('customTimePicker').value;
+      if (!timeInput) {
+        clearCustomTime();
+        return;
+      }
+
+      const parts = timeInput.split(':');
+      const hour24 = parts[0];
+      const mins = parts[1] || "00";
+
+      currentSelectedHour = hour24;
+      customSelectedMinutes = mins;
+
+      localStorage.setItem('haripur_current_hour', hour24);
+      localStorage.setItem('haripur_current_minutes', mins);
+
+      updateTimeDisplay();
+      closeTimeModal();
+    }
+
+    function clearCustomTime() {
+      currentSelectedHour = "";
+      customSelectedMinutes = "";
+      localStorage.removeItem('haripur_current_hour');
+      localStorage.removeItem('haripur_current_minutes');
+      document.getElementById('customTimePicker').value = "";
+      updateTimeDisplay();
+      closeTimeModal();
+    }
+
+    /* Contact Logic */
+    function setActiveInput(inputId) {
+      activeInputId = inputId;
+    }
 
     function populateModalInputs() {
       document.getElementById('nldcContacts').value = (GROUPS.NLDC || []).join(', ');
       document.getElementById('egcbHourlyContacts').value = (GROUPS.EGCB_Hourly || []).join(', ');
       document.getElementById('egcbMgmtContacts').value = (GROUPS.EGCB_Mgmt || []).join(', ');
+      document.getElementById('gasReadingContacts').value = (GROUPS.Gas_Reading || []).join(', ');
     }
 
-    async function pickContacts(targetInputId) {
-      if ('contacts' in navigator && 'select' in navigator.contacts) {
-        try {
-          const props = ['tel'];
-          const opts = { multiple: true };
-          const contacts = await navigator.contacts.select(props, opts);
+    function renderContactChips() {
+      const container = document.getElementById('contactChipsContainer');
+      container.innerHTML = '';
 
-          let selectedNumbers = [];
-          contacts.forEach(c => {
-            if (c.tel && c.tel.length > 0) {
-              selectedNumbers.push(...c.tel);
-            }
-          });
+      SAVED_CONTACTS.forEach((c, index) => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `
+          <span onclick="appendContactToActive('${c.number}')">${c.name}: ${c.number}</span>
+          <span class="chip-remove" onclick="removeSavedContact(${index})">&times;</span>
+        `;
+        container.appendChild(chip);
+      });
+    }
 
-          if (selectedNumbers.length > 0) {
-            const cleaned = selectedNumbers.map(num => num.replace(/[\s\-\(\)]/g, ''));
-            const inputField = document.getElementById(targetInputId);
-            const currentVals = inputField.value ? inputField.value.split(',').map(s => s.trim()) : [];
-            const combined = Array.from(new Set([...currentVals, ...cleaned])).filter(Boolean);
-            inputField.value = combined.join(', ');
-          }
-        } catch (err) {
-          alert("Contact Picker cancelled or unsupported.");
-        }
-      } else {
-        alert("Contact Picker API is not available on this browser/environment. Enter numbers manually.");
+    function appendContactToActive(number) {
+      const field = document.getElementById(activeInputId);
+      if (!field) return;
+
+      const currentVals = field.value ? field.value.split(',').map(s => s.trim()) : [];
+      if (!currentVals.includes(number)) {
+        currentVals.push(number);
+        field.value = currentVals.filter(Boolean).join(', ');
       }
+    }
+
+    function addSavedContact() {
+      const nameInput = document.getElementById('newContactName');
+      const numberInput = document.getElementById('newContactNumber');
+      const name = nameInput.value.trim();
+      const number = numberInput.value.trim();
+
+      if (!name || !number) {
+        alert('Please enter both a name and phone number.');
+        return;
+      }
+
+      SAVED_CONTACTS.push({ name, number });
+      localStorage.setItem('haripur_quick_contacts', JSON.stringify(SAVED_CONTACTS));
+      
+      nameInput.value = '';
+      numberInput.value = '';
+      renderContactChips();
+    }
+
+    function removeSavedContact(index) {
+      SAVED_CONTACTS.splice(index, 1);
+      localStorage.setItem('haripur_quick_contacts', JSON.stringify(SAVED_CONTACTS));
+      renderContactChips();
     }
 
     function openMenu() {
@@ -446,8 +1100,16 @@
 
     function handleMenu(item) {
       closeMenu();
-      if (item === 'contact groups') {
+      if (item === 'CONTACT GROUPS') {
         openContactModal();
+      } else if (item === 'CUSTOMISE MODE') {
+        openModeModal();
+      } else if (item === 'CUSTOMISE TIME') {
+        openTimeModal();
+      } else if (item === 'GAS READING') {
+        openGasModal();
+      } else if (item === 'APPSCRIPT CONFIG') {
+        openAppscriptModal();
       } else {
         alert('Selected: ' + item);
       }
@@ -466,13 +1128,40 @@
       GROUPS.NLDC = document.getElementById('nldcContacts').value.split(',').map(s => s.trim()).filter(Boolean);
       GROUPS.EGCB_Hourly = document.getElementById('egcbHourlyContacts').value.split(',').map(s => s.trim()).filter(Boolean);
       GROUPS.EGCB_Mgmt = document.getElementById('egcbMgmtContacts').value.split(',').map(s => s.trim()).filter(Boolean);
+      GROUPS.Gas_Reading = document.getElementById('gasReadingContacts').value.split(',').map(s => s.trim()).filter(Boolean);
 
       localStorage.setItem('haripur_contact_groups', JSON.stringify(GROUPS));
       alert('Contact groups successfully saved!');
       closeContactModal();
     }
 
-    function sendGroupSms(groupKey) {
+    function getFormattedDate() {
+      const d = new Date();
+      const day = String(d.getDate()).padStart(2, '0');
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const month = months[d.getMonth()];
+      const year = d.getFullYear();
+      return `${day} ${month}, ${year}`;
+    }
+
+    /* KWH Modal Handlers */
+    function openKwhModal() {
+      document.getElementById('kwhInput').value = "";
+      document.getElementById('kwhModal').classList.add('active');
+    }
+
+    function closeKwhModal() {
+      document.getElementById('kwhModal').classList.remove('active');
+    }
+
+    function submitKwhValue() {
+      const kwhVal = document.getElementById('kwhInput').value.trim();
+      closeKwhModal();
+      buildAndShowNldcSms(kwhVal);
+    }
+
+    /* Prepare SMS preview */
+    function prepareSms(groupKey) {
       let targetNumbers = [];
 
       if (groupKey === 'NLDC') {
@@ -482,30 +1171,113 @@
       }
 
       if (!targetNumbers || targetNumbers.length === 0) {
-        alert(`No contacts saved for ${groupKey === 'EGCB' ? 'EGCB Hourly' : 'NLDC'}. Set them under "contact groups".`);
+        alert(`No contacts saved for ${groupKey === 'EGCB' ? 'EGCB Hourly' : 'NLDC'}. Set them under "CONTACT GROUPS".`);
         return;
       }
 
-      const labels = [
-        "GT MW", "GT MVAR",
-        "ST MW", "ST MVAR",
-        "Net", "FGP",
-        "2X120 MW", "335 MW", "75 MW"
-      ];
+      const now = new Date();
+      const hourVal = currentSelectedHour || String(now.getHours()).padStart(2, '0');
 
-      let messageLines = [];
-      for (let i = 1; i <= 9; i++) {
-        const val = document.getElementById(`field${i}`).value.trim();
-        if (val) {
-          messageLines.push(`${labels[i-1]}: ${val}`);
+      if (groupKey === 'EGCB') {
+        const gt = parseFloat(document.getElementById('field1').value) || 0;
+        const st = parseFloat(document.getElementById('field3').value) || 0;
+        const p2x120 = parseFloat(document.getElementById('field7').value) || 0;
+        const p335 = parseFloat(document.getElementById('field8').value) || 0;
+        const p75 = parseFloat(document.getElementById('field9').value) || 0;
+
+        const gross = gt + st;
+        const totalGen = gross + p2x120 + p335 + p75;
+        const modeSuffix = (currentSelectedMode && currentSelectedMode !== "No Modes") ? `(${currentSelectedMode})` : "";
+        const dateStr = getFormattedDate();
+
+        const fullMessage = `Haripur 412 MW CCPP.\nGT: ${gt} MW, ST: ${st} MW.${modeSuffix}\nGROSS: ${gross} MW.\nEGCB total generation: ${totalGen} MW\n(${gross}+${p2x120}+${p335}+${p75})\n${hourVal}:00 Hour.\n${dateStr}`;
+
+        showSmsPreview('EGCB', targetNumbers, fullMessage);
+      } 
+      else if (groupKey === 'NLDC') {
+        if (hourVal === '00') {
+          openKwhModal();
+        } else {
+          buildAndShowNldcSms('');
         }
       }
+    }
 
-      const fullMessage = messageLines.join('\n');
-      const encodedMsg = encodeURIComponent(fullMessage);
-      const recipientsString = targetNumbers.join(';');
+    function buildAndShowNldcSms(kwhValue) {
+      const targetNumbers = GROUPS.NLDC;
+      const now = new Date();
+      const hourVal = currentSelectedHour || String(now.getHours()).padStart(2, '0');
 
+      let currentMins = now.getMinutes();
+      if (customSelectedMinutes) {
+        currentMins = parseInt(customSelectedMinutes, 10);
+      }
+
+      const mm = (currentMins >= 30 && currentMins <= 59) ? "30" : "00";
+
+      const rawNet = parseFloat(document.getElementById('field5').value) || 0;
+      const netMw = rawNet > 0 ? (rawNet - 5) : 0;
+
+      const gtMvar = parseFloat(document.getElementById('field2').value) || 0;
+      const stMvar = parseFloat(document.getElementById('field4').value) || 0;
+      const totalMvar = gtMvar + stMvar;
+
+      const fullMessage = `${hourVal}:${mm}/MW:${netMw}/MVAR:${totalMvar}/KWH:${kwhValue}`;
+
+      showSmsPreview('NLDC', targetNumbers, fullMessage);
+    }
+
+    function showSmsPreview(groupName, recipients, message) {
+      pendingSms.type = groupName;
+      pendingSms.recipients = recipients;
+      pendingSms.message = message;
+
+      document.getElementById('smsPreviewTitle').innerText = `${groupName} SMS PREVIEW`;
+      document.getElementById('smsRecipientsLabel').innerText = `Recipients: ${recipients && recipients.length ? recipients.join(', ') : 'None'}`;
+      document.getElementById('smsPreviewText').innerText = message;
+
+      document.getElementById('smsPreviewModal').classList.add('active');
+    }
+
+    function closeSmsPreviewModal() {
+      document.getElementById('smsPreviewModal').classList.remove('active');
+    }
+
+    function confirmAndSendSms() {
+      closeSmsPreviewModal();
+
+      if (pendingSms.type === 'EGCB') {
+        openShareOptionModal();
+      } else {
+        sendViaSmsDirect();
+      }
+    }
+
+    function openShareOptionModal() {
+      document.getElementById('shareOptionModal').classList.add('active');
+    }
+
+    function closeShareOptionModal() {
+      document.getElementById('shareOptionModal').classList.remove('active');
+    }
+
+    function sendViaSmsDirect() {
+      closeShareOptionModal();
+
+      if (pendingSms.type === 'GAS' && pendingSms.gasDataToSave) {
+        localStorage.setItem('haripur_gas_state', JSON.stringify(pendingSms.gasDataToSave));
+      }
+
+      const recipientsString = (pendingSms.recipients || []).join(';');
+      const encodedMsg = encodeURIComponent(pendingSms.message);
       window.location.href = `sms:${recipientsString}?body=${encodedMsg}`;
+    }
+
+    function sendViaWhatsApp() {
+      closeShareOptionModal();
+
+      const encodedMsg = encodeURIComponent(pendingSms.message);
+      window.location.href = `https://api.whatsapp.com/send?text=${encodedMsg}`;
     }
   </script>
 </body>
