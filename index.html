@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haripur 412 MW CCPP</title>
+
+  <!-- PWA Manifest Link -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f4f6f8;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .menu-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      display: none;
+    }
+
+    .menu-drawer {
+      position: absolute;
+      top: 0; left: -260px;
+      width: 240px; height: 100%;
+      background: #ffffff;
+      z-index: 101;
+      transition: left 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-drawer.open { left: 0; }
+    .menu-overlay.active { display: block; }
+
+    .drawer-header {
+      padding: 16px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .menu-list {
+      list-style: none;
+      padding: 8px;
+    }
+
+    .menu-item {
+      padding: 12px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .menu-item:hover {
+      background: #f1f5f9;
+    }
+
+    .body-content {
+      padding: 16px;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .input-row label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      min-width: 80px;
+      white-space: nowrap;
+    }
+
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input[type="number"]:focus, input[type="text"]:focus {
+      border-color: #2563eb;
+    }
+
+    .info-labels-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0;
+      padding: 8px 12px;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+    }
+
+    .info-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .bottom-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-send-group {
+      padding: 14px;
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-send-group:hover {
+      background-color: #1d4ed8;
+    }
+
+    .last-uploaded-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+      text-align: center;
+      padding-top: 4px;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-content {
+      background: #ffffff;
+      width: 100%;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .group-item {
+      margin-bottom: 14px;
+    }
+
+    .group-item label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .contact-picker-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-pick {
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-pick:hover { background-color: #1d4ed8; }
+
+    .btn-save {
+      width: 100%;
+      padding: 12px;
+      background-color: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Menu Drawer -->
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <nav class="menu-drawer" id="menuDrawer">
+      <div class="drawer-header">
+        <span>Menu</span>
+        <button style="background:none; border:none; font-size:18px; cursor:pointer;" onclick="closeMenu()">&times;</button>
+      </div>
+      <ul class="menu-list">
+        <li class="menu-item" onclick="handleMenu('Start-Trip')">Start-Trip</li>
+        <li class="menu-item" onclick="handleMenu('contact groups')">contact groups</li>
+        <li class="menu-item" onclick="handleMenu('gas reading')">gas reading</li>
+        <li class="menu-item" onclick="handleMenu('Customise Mode')">Customise Mode</li>
+        <li class="menu-item" onclick="handleMenu('Customise time')">Customise time</li>
+        <li class="menu-item" onclick="handleMenu('Upload')">Upload</li>
+      </ul>
+    </nav>
+
+    <!-- Contact Groups Modal -->
+    <div class="modal-overlay" id="contactModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="font-size: 16px; color: #0f172a;">Contact Groups</h4>
+          <button style="background:none; border:none; font-size:20px; cursor:pointer;" onclick="closeContactModal()">&times;</button>
+        </div>
+
+        <div class="group-item">
+          <label>NLDC</label>
+          <div class="contact-picker-row">
+            <input type="text" id="nldcContacts" placeholder="Comma separated numbers">
+            <button class="btn-pick" onclick="pickContacts('nldcContacts')">Pick</button>
+          </div>
+        </div>
+
+        <div class="group-item">
+          <label>EGCB Hourly</label>
+          <div class="contact-picker-row">
+            <input type="text" id="egcbHourlyContacts" placeholder="Comma separated numbers">
+            <button class="btn-pick" onclick="pickContacts('egcbHourlyContacts')">Pick</button>
+          </div>
+        </div>
+
+        <div class="group-item">
+          <label>EGCB Management</label>
+          <div class="contact-picker-row">
+            <input type="text" id="egcbMgmtContacts" placeholder="Comma separated numbers">
+            <button class="btn-pick" onclick="pickContacts('egcbMgmtContacts')">Pick</button>
+          </div>
+        </div>
+
+        <button class="btn-save" onclick="saveContactGroups()">Save Groups</button>
+      </div>
+    </div>
+
+    <!-- App Header -->
+    <div class="header">
+      <button class="menu-btn" onclick="openMenu()">☰</button>
+      <h3 style="font-size: 16px;">Haripur 412 MW CCPP</h3>
+    </div>
+
+    <!-- Main Content -->
+    <div class="body-content">
+      <div class="input-row">
+        <label>GT</label>
+        <div class="grid-2x2">
+          <input type="number" step="any" inputmode="decimal" id="field1" placeholder="MW">
+          <input type="number" step="any" inputmode="decimal" id="field2" placeholder="MVAR">
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label>ST</label>
+        <div class="grid-2x2">
+          <input type="number" step="any" inputmode="decimal" id="field3" placeholder="MW">
+          <input type="number" step="any" inputmode="decimal" id="field4" placeholder="MVAR">
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label for="field5">Net</label>
+        <input type="number" step="any" inputmode="decimal" id="field5" placeholder="MW">
+      </div>
+
+      <div class="input-row">
+        <label for="field6">FGP</label>
+        <input type="number" step="any" inputmode="decimal" id="field6" placeholder="Barg">
+      </div>
+
+      <div class="input-row">
+        <label for="field7">2X120 MW</label>
+        <input type="number" step="any" inputmode="decimal" id="field7" placeholder="MW">
+      </div>
+
+      <div class="input-row">
+        <label for="field8">335 MW</label>
+        <input type="number" step="any" inputmode="decimal" id="field8" placeholder="MW">
+      </div>
+
+      <div class="input-row">
+        <label for="field9">75 MW</label>
+        <input type="number" step="any" inputmode="decimal" id="field9" placeholder="MW">
+      </div>
+
+      <div class="info-labels-row">
+        <span class="info-label" id="modeLabel">Mode: </span>
+        <span class="info-label" id="timeLabel">Time: </span>
+      </div>
+
+      <div class="bottom-buttons">
+        <button class="btn-send-group" onclick="sendGroupSms('EGCB')">Send EGCB</button>
+        <button class="btn-send-group" onclick="sendGroupSms('NLDC')">Send NLDC</button>
+      </div>
+
+      <div class="last-uploaded-label" id="lastUploadedLabel">
+        Last Uploaded: 
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Register Service Worker for PWA compliance
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(err => console.log('Service Worker failed:', err));
+    }
+
+    let GROUPS = {
+      NLDC: [],
+      EGCB_Hourly: [],
+      EGCB_Mgmt: []
+    };
+
+    window.onload = function() {
+      const savedGroups = localStorage.getItem('haripur_contact_groups');
+      if (savedGroups) {
+        GROUPS = JSON.parse(savedGroups);
+      }
+      populateModalInputs();
+    };
+
+    function populateModalInputs() {
+      document.getElementById('nldcContacts').value = (GROUPS.NLDC || []).join(', ');
+      document.getElementById('egcbHourlyContacts').value = (GROUPS.EGCB_Hourly || []).join(', ');
+      document.getElementById('egcbMgmtContacts').value = (GROUPS.EGCB_Mgmt || []).join(', ');
+    }
+
+    async function pickContacts(targetInputId) {
+      if ('contacts' in navigator && 'select' in navigator.contacts) {
+        try {
+          const props = ['tel'];
+          const opts = { multiple: true };
+          const contacts = await navigator.contacts.select(props, opts);
+
+          let selectedNumbers = [];
+          contacts.forEach(c => {
+            if (c.tel && c.tel.length > 0) {
+              selectedNumbers.push(...c.tel);
+            }
+          });
+
+          if (selectedNumbers.length > 0) {
+            const cleaned = selectedNumbers.map(num => num.replace(/[\s\-\(\)]/g, ''));
+            const inputField = document.getElementById(targetInputId);
+            const currentVals = inputField.value ? inputField.value.split(',').map(s => s.trim()) : [];
+            const combined = Array.from(new Set([...currentVals, ...cleaned])).filter(Boolean);
+            inputField.value = combined.join(', ');
+          }
+        } catch (err) {
+          alert("Contact Picker cancelled or unsupported.");
+        }
+      } else {
+        alert("Contact Picker API is not available on this browser/environment. Enter numbers manually.");
+      }
+    }
+
+    function openMenu() {
+      document.getElementById('menuOverlay').classList.add('active');
+      document.getElementById('menuDrawer').classList.add('open');
+    }
+
+    function closeMenu() {
+      document.getElementById('menuOverlay').classList.remove('active');
+      document.getElementById('menuDrawer').classList.remove('open');
+    }
+
+    function handleMenu(item) {
+      closeMenu();
+      if (item === 'contact groups') {
+        openContactModal();
+      } else {
+        alert('Selected: ' + item);
+      }
+    }
+
+    function openContactModal() {
+      populateModalInputs();
+      document.getElementById('contactModal').classList.add('active');
+    }
+
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.remove('active');
+    }
+
+    function saveContactGroups() {
+      GROUPS.NLDC = document.getElementById('nldcContacts').value.split(',').map(s => s.trim()).filter(Boolean);
+      GROUPS.EGCB_Hourly = document.getElementById('egcbHourlyContacts').value.split(',').map(s => s.trim()).filter(Boolean);
+      GROUPS.EGCB_Mgmt = document.getElementById('egcbMgmtContacts').value.split(',').map(s => s.trim()).filter(Boolean);
+
+      localStorage.setItem('haripur_contact_groups', JSON.stringify(GROUPS));
+      alert('Contact groups successfully saved!');
+      closeContactModal();
+    }
+
+    function sendGroupSms(groupKey) {
+      let targetNumbers = [];
+
+      if (groupKey === 'NLDC') {
+        targetNumbers = GROUPS.NLDC;
+      } else if (groupKey === 'EGCB') {
+        targetNumbers = GROUPS.EGCB_Hourly;
+      }
+
+      if (!targetNumbers || targetNumbers.length === 0) {
+        alert(`No contacts saved for ${groupKey === 'EGCB' ? 'EGCB Hourly' : 'NLDC'}. Set them under "contact groups".`);
+        return;
+      }
+
+      const labels = [
+        "GT MW", "GT MVAR",
+        "ST MW", "ST MVAR",
+        "Net", "FGP",
+        "2X120 MW", "335 MW", "75 MW"
+      ];
+
+      let messageLines = [];
+      for (let i = 1; i <= 9; i++) {
+        const val = document.getElementById(`field${i}`).value.trim();
+        if (val) {
+          messageLines.push(`${labels[i-1]}: ${val}`);
+        }
+      }
+
+      const fullMessage = messageLines.join('\n');
+      const encodedMsg = encodeURIComponent(fullMessage);
+      const recipientsString = targetNumbers.join(';');
+
+      window.location.href = `sms:${recipientsString}?body=${encodedMsg}`;
+    }
+  </script>
+</body>
+</html>
